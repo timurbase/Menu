@@ -20,8 +20,8 @@
 
         .tv{
             width:100vw;height:100vh;position:relative;overflow:hidden;
-            display:grid;grid-template-rows:auto auto 1fr;
-            gap:.5vh;padding:.7vh 1vw .5vh;
+            display:grid;grid-template-rows:auto auto 1fr auto;
+            gap:.4vh;padding:.6vh 1vw .4vh;
             background:linear-gradient(135deg,var(--bg1) 0%,var(--bg2) 50%,var(--bg3) 100%);
         }
 
@@ -90,7 +90,8 @@
             display:grid;grid-template-columns:1fr 1fr 1fr;
             gap:.7vw;min-height:0;overflow:hidden;
         }
-        .col{display:flex;flex-direction:column;gap:.4vh;overflow:hidden}
+        .col{display:flex;flex-direction:column;gap:.4vh;overflow-y:auto;overflow-x:hidden;scrollbar-width:none}
+        .col::-webkit-scrollbar{display:none}
 
         /* ═══ PANEL ═══ */
         .pnl{
@@ -181,7 +182,7 @@
         .b3 img{width:3vh;height:3vh}
 
         /* ═══ SWEETS 5x2 grid ═══ */
-        .sw-grid{display:grid;grid-template-columns:1fr 1fr 1fr 1fr 1fr 1fr;gap:.25vh .12vw}
+        .sw-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:.25vh .12vw}
         .sw{
             display:flex;flex-direction:column;align-items:center;
             padding:.3vh .1vw;text-align:center;
@@ -192,6 +193,35 @@
         .sw img{width:4.5vh;height:4.5vh;border-radius:.3vh;object-fit:cover;border:1px solid rgba(0,0,0,.05);margin-bottom:.15vh}
         .sw-n{font-size:1.4vh;font-weight:800;color:var(--dark);line-height:1.1}
         .sw-p{font-size:1.5vh;font-weight:900;color:var(--red)}
+
+        /* ═══ BANNER ═══ */
+        .banner{
+            position:relative;z-index:2;
+            background:linear-gradient(135deg,var(--red),#e8553a,var(--red2));
+            border-radius:1vh;padding:.6vh 1.5vw;
+            display:flex;align-items:center;justify-content:center;gap:1vw;
+            box-shadow:0 4px 20px rgba(212,66,42,.25);
+            overflow:hidden;
+        }
+        .banner::before{
+            content:'';position:absolute;top:0;left:0;right:0;height:50%;
+            background:linear-gradient(180deg,rgba(255,255,255,.15),transparent);
+            pointer-events:none;border-radius:1vh 1vh 0 0;
+        }
+        .banner-pct{
+            font-family:'Playfair Display',serif;
+            font-size:4vh;font-weight:900;color:var(--lgold);
+            text-shadow:0 2px 8px rgba(0,0,0,.2);
+            line-height:1;
+        }
+        .banner-txt{
+            font-size:2.2vh;font-weight:900;color:#fff;
+            text-transform:uppercase;letter-spacing:.15vw;
+            text-shadow:0 1px 4px rgba(0,0,0,.15);
+        }
+        .banner-sub{
+            font-size:1.4vh;font-weight:700;color:rgba(255,255,255,.85);
+        }
     </style>
 </head>
 <body>
@@ -213,6 +243,14 @@
 
     <div class="hero" id="heroRow"></div>
     <div class="grid" id="foodGrid"></div>
+    <div class="banner">
+        <span class="banner-pct">50%</span>
+        <div>
+            <div class="banner-txt">Bugun barcha mahsulotlarga chegirma!</div>
+            <div class="banner-sub">Aksiya faqat bugun amal qiladi</div>
+        </div>
+        <span class="banner-pct">50%</span>
+    </div>
 </div>
 
 <script>
@@ -235,7 +273,7 @@ const MENU = {
   },
   hotdoglar: {
     col:1, cat:"Hot-Doglar", items:[
-      { name:"Hotdog", price:"13,000", img:"images/hotdog.jpg",
+      { name:"Hotdog", price:"13,000", img:"images/hotdog.webp",
         vars:[["Oddiy","13,000"],["Kanada","16,000"]] },
       { name:"Dvaynoy Hotdog", price:"16,000", img:"images/dvaynoy-hotdog.jpg",
         vars:[["Oddiy","16,000"],["Kanada","20,000"]] },
@@ -289,6 +327,18 @@ const MENU = {
         vars:[["0.5L","4,000"],["1L","6,000"],["1.5L","8,000"]] },
       { name:"Bonaqua Gazsiz", img:"images/bonaqua.jpg",
         vars:[["0.5L","4,000"],["1L","6,000"],["1.5L","8,000"]] },
+    ]
+  },
+  maxito: {
+    col:3, cat:"Maxito", type:"drinks", items:[
+      { name:"Maxito Laim", img:"images/maxito-laim.jpg",
+        vars:[["1 ta","20,000"]] },
+      { name:"Maxito Ocean", img:"images/maxito-ocean.jpg",
+        vars:[["1 ta","20,000"]] },
+      { name:"Maxito Malina", img:"images/maxito-malina.jpg",
+        vars:[["1 ta","20,000"]] },
+      { name:"Maxito Ananasli", img:"images/maxito-ananas.jpg",
+        vars:[["1 ta","20,000"]] },
     ]
   },
   balnishniy: {
@@ -345,41 +395,59 @@ const MENU = {
   const byCols = {1:[],2:[],3:[]};
   Object.entries(MENU).forEach(([k,s])=>{ if(k!=='kombo') byCols[s.col].push(s); });
 
+  // helpers
+  function renderDrink(d){
+    const sv=(d.vars||[]).map(v=>`<div class="vt"><span class="vn">${v[0]}</span><span class="vp">${v[1]}</span></div>`).join('');
+    return `<div class="dk"><img src="${d.img}"><div class="dk-i"><span class="dk-n">${d.name}</span><div class="dk-s">${sv}</div></div></div>`;
+  }
+  function renderBaln(items){
+    return '<div class="b3">'+items.map(d=>
+      `<div class="dk"><img src="${d.img}"><div class="dk-i"><span class="dk-n">${d.name}</span><span class="dk-pr">${d.price}</span></div></div>`
+    ).join('')+'</div>';
+  }
+  function renderItem(it){
+    const vs=(it.vars||[]).map(v=>`<div class="vt"><span class="vn">${v[0]}</span><span class="vp">${v[1]}</span></div>`).join('');
+    return `<div class="fi"><img src="${it.img}"><div class="fi-b"><div class="fi-r"><span class="fi-n">${it.name}</span><span class="fi-p">${it.price}</span></div><div class="vr">${vs}</div></div></div>`;
+  }
+  function renderSweets(items){
+    let h='<div class="sw-grid">';
+    items.forEach(it=>{ h+=`<div class="sw"><img src="${it.img}"><span class="sw-n">${it.name}</span><span class="sw-p">${it.price}</span></div>`; });
+    return h+'</div>';
+  }
+
   grid.innerHTML = '';
   for(let c=1;c<=3;c++){
     const col = document.createElement('div');
     col.className='col';
 
-    byCols[c].forEach(sec=>{
-      let h='';
-      if(sec.cat) h+=`<div class="ph"><h2>${sec.cat}</h2></div>`;
-      h+='<div class="pi">';
+    if(c===3){
+      // 3-USTUN: Ichimliklar + Maxito + Baln bitta panelda, keyin Desertlar
+      let dh='<div class="ph"><h2>Ichimliklar</h2></div><div class="pi">';
+      MENU.ichimliklar.items.forEach(d=>{ dh+=renderDrink(d); });
+      // sub-header Maxito
+      dh+='</div><div class="ph" style="margin-top:.3vh"><h2>Maxito</h2></div><div class="pi">';
+      MENU.maxito.items.forEach(d=>{ dh+=renderDrink(d); });
+      dh+='</div><div class="pi" style="margin-top:.2vh">';
+      dh+=renderBaln(MENU.balnishniy.items);
+      dh+='</div>';
+      col.innerHTML+=`<div class="pnl">${dh}</div>`;
 
-      if(sec.type==='sweets'){
-        h+='<div class="sw-grid">';
-        sec.items.forEach(it=>{
-          h+=`<div class="sw"><img src="${it.img}"><span class="sw-n">${it.name}</span><span class="sw-p">${it.price}</span></div>`;
-        });
+      // Desertlar
+      let sh='<div class="ph"><h2>Desertlar</h2></div><div class="pi">';
+      sh+=renderSweets(MENU.shirinliklar.items);
+      sh+='</div>';
+      col.innerHTML+=`<div class="pnl">${sh}</div>`;
+    } else {
+      byCols[c].forEach(sec=>{
+        if(sec.type==='drinks'||sec.type==='baln'||sec.type==='sweets') return;
+        let h='';
+        if(sec.cat) h+=`<div class="ph"><h2>${sec.cat}</h2></div>`;
+        h+='<div class="pi">';
+        sec.items.forEach(it=>{ h+=renderItem(it); });
         h+='</div>';
-      } else if(sec.type==='drinks'){
-        sec.items.forEach(d=>{
-          const sv=(d.vars||[]).map(v=>`<div class="vt"><span class="vn">${v[0]}</span><span class="vp">${v[1]}</span></div>`).join('');
-          h+=`<div class="dk"><img src="${d.img}"><div class="dk-i"><span class="dk-n">${d.name}</span><div class="dk-s">${sv}</div></div></div>`;
-        });
-      } else if(sec.type==='baln'){
-        h+='<div class="b3">'+sec.items.map(d=>
-          `<div class="dk"><img src="${d.img}"><div class="dk-i"><span class="dk-n">${d.name}</span><span class="dk-pr">${d.price}</span></div></div>`
-        ).join('')+'</div>';
-      } else {
-        sec.items.forEach(it=>{
-          const vs=(it.vars||[]).map(v=>`<div class="vt"><span class="vn">${v[0]}</span><span class="vp">${v[1]}</span></div>`).join('');
-          h+=`<div class="fi"><img src="${it.img}"><div class="fi-b"><div class="fi-r"><span class="fi-n">${it.name}</span><span class="fi-p">${it.price}</span></div><div class="vr">${vs}</div></div></div>`;
-        });
-      }
-
-      h+='</div>';
-      col.innerHTML+=`<div class="pnl">${h}</div>`;
-    });
+        col.innerHTML+=`<div class="pnl">${h}</div>`;
+      });
+    }
 
     grid.appendChild(col);
   }
