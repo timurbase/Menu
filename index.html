@@ -21,7 +21,7 @@
         .tv{
             width:100vw;height:100vh;position:relative;overflow:hidden;
             display:grid;grid-template-rows:auto auto 1fr auto;
-            gap:.4vh;padding:.6vh 1vw .4vh;
+            gap:.35vh;padding:.5vh 1vw .4vh;
             background:linear-gradient(135deg,var(--bg1) 0%,var(--bg2) 50%,var(--bg3) 100%);
         }
 
@@ -159,30 +159,61 @@
         .vn{font-size:1.5vh;color:var(--text2);font-weight:700}
         .vp{font-size:1.6vh;color:var(--red2);font-weight:900}
 
-        /* ═══ DRINKS ═══ */
+        /* ═══ DRINKS SECTION ═══ */
+        .dk-grid{display:grid;grid-template-columns:1fr 1fr;gap:.3vh .2vw}
+
+        /* oddiy ichimlik — rasmsiz, kompakt */
         .dk{
-            display:flex;align-items:center;gap:.3vw;
-            padding:.3vh .25vw;
+            display:flex;justify-content:space-between;align-items:center;
+            padding:.3vh .3vw;
             background:rgba(255,255,255,.5);
             border:1px solid rgba(255,255,255,.8);
             border-radius:.4vh;backdrop-filter:blur(6px);
             box-shadow:0 1px 4px rgba(0,0,0,.03);
         }
-        .dk img{width:4vh;height:4vh;border-radius:.3vh;object-fit:cover;flex-shrink:0;border:1px solid rgba(0,0,0,.05);box-shadow:0 1px 4px rgba(0,0,0,.06)}
-        .dk-i{flex:1;display:flex;justify-content:space-between;align-items:center}
-        .dk-n{font-size:1.8vh;font-weight:800;color:var(--dark)}
-        .dk-s{display:flex;gap:.1vw}
-        .dk-s .vt{border:none;background:rgba(232,163,23,.1)}
-        .dk-pr{font-size:1.8vh;font-weight:900;color:var(--red)}
+        .dk-n{font-size:1.7vh;font-weight:800;color:var(--dark)}
+        .dk-p-wrap{display:flex;flex-wrap:wrap;gap:.08vw;justify-content:flex-end}
+        .dk-p-wrap .vt{border:none;background:rgba(232,163,23,.12)}
+        .dk-pr{font-size:1.7vh;font-weight:900;color:var(--red)}
 
-        .b3{display:flex;gap:.15vw}
-        .b3 .dk{flex:1;padding:.25vh .15vw}
-        .b3 .dk-n{font-size:1.4vh}
-        .b3 .dk-pr{font-size:1.5vh}
-        .b3 img{width:3vh;height:3vh}
+        /* maxito — rasmli, premium */
+        .dk-mox{
+            display:flex;align-items:center;gap:.3vw;
+            padding:.35vh .3vw;
+            background:linear-gradient(135deg,rgba(58,125,68,.08),rgba(255,255,255,.5));
+            border:1.5px solid rgba(58,125,68,.2);
+            border-radius:.5vh;backdrop-filter:blur(8px);
+            box-shadow:0 2px 8px rgba(0,0,0,.05);
+        }
+        .dk-mox img{
+            width:4.5vh;height:4.5vh;border-radius:.4vh;
+            object-fit:cover;flex-shrink:0;
+            border:1px solid rgba(58,125,68,.2);
+            box-shadow:0 2px 6px rgba(0,0,0,.1);
+        }
+        .dk-mox .dk-n{font-size:1.6vh}
+        .dk-mox .dk-pr{font-size:1.7vh}
 
-        /* ═══ SWEETS 5x2 grid ═══ */
-        .sw-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:.25vh .12vw}
+        /* sub-label */
+        .dk-label{
+            grid-column:1/-1;
+            font-size:1.3vh;font-weight:900;color:var(--red);
+            text-transform:uppercase;letter-spacing:.08vw;
+            padding:.15vh 0;
+            border-top:1px dashed rgba(212,66,42,.2);
+            margin-top:.1vh;
+        }
+
+        /* ═══ DESSERT ROW — pastda to'liq kenglik ═══ */
+        .dessert-row{
+            position:relative;z-index:1;
+            background:rgba(255,255,255,.45);
+            backdrop-filter:blur(10px);
+            border:1px solid rgba(255,255,255,.7);
+            border-radius:.8vh;padding:.35vh .4vw;
+            box-shadow:0 2px 12px rgba(0,0,0,.04);
+        }
+        .sw-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:.2vh .1vw}
         .sw{
             display:flex;flex-direction:column;align-items:center;
             padding:.3vh .1vw;text-align:center;
@@ -246,8 +277,8 @@
     <div class="banner">
         <span class="banner-pct">50%</span>
         <div>
-            <div class="banner-txt">Bugun barcha mahsulotlarga chegirma!</div>
-            <div class="banner-sub">Aksiya faqat bugun amal qiladi</div>
+            <div class="banner-txt">Barcha fastfood mahsulotlariga chegirma!</div>
+            <div class="banner-sub">Burgerlar, Hot-doglar, Lavash, Pitsa va Kombolar</div>
         </div>
         <span class="banner-pct">50%</span>
     </div>
@@ -323,9 +354,7 @@ const MENU = {
         vars:[["0.5L","8,000"],["1L","13,000"]] },
       { name:"FuseTea Qora", img:"images/fusetea-qora.jpg",
         vars:[["0.5L","8,000"],["1L","13,000"]] },
-      { name:"Bonaqua Gazli", img:"images/bonaqua.jpg",
-        vars:[["0.5L","4,000"],["1L","6,000"],["1.5L","8,000"]] },
-      { name:"Bonaqua Gazsiz", img:"images/bonaqua.jpg",
+      { name:"Bonaqua Gazli/Gazsiz", img:"images/bonaqua.jpg",
         vars:[["0.5L","4,000"],["1L","6,000"],["1.5L","8,000"]] },
     ]
   },
@@ -422,17 +451,28 @@ const MENU = {
 
     if(c===3){
       // 3-USTUN: Ichimliklar + Maxito + Baln bitta panelda, keyin Desertlar
-      let dh='<div class="ph"><h2>Ichimliklar</h2></div><div class="pi">';
-      MENU.ichimliklar.items.forEach(d=>{ dh+=renderDrink(d); });
-      MENU.maxito.items.forEach(d=>{ dh+=renderDrink(d); });
-      dh+=renderBaln(MENU.balnishniy.items);
+      let dh='<div class="ph"><h2>Ichimliklar</h2></div><div class="dk-grid">';
+      // Oddiy ichimliklar — rasmsiz, nom + hajmlar
+      MENU.ichimliklar.items.forEach(d=>{
+        const sv=(d.vars||[]).map(v=>`<div class="vt"><span class="vn">${v[0]}</span><span class="vp">${v[1]}</span></div>`).join('');
+        dh+=`<div class="dk"><span class="dk-n">${d.name}</span><div class="dk-p-wrap">${sv}</div></div>`;
+      });
+      // Balnishniy — rasmsiz
+      MENU.balnishniy.items.forEach(d=>{
+        dh+=`<div class="dk"><span class="dk-n">${d.name}</span><span class="dk-pr">${d.price}</span></div>`;
+      });
+      // Maxito — rasmli, ajralib turadi
+      
+      MENU.maxito.items.forEach(d=>{
+        const pr=(d.vars||[]).map(v=>v[1]).join('');
+        dh+=`<div class="dk-mox"><img src="${d.img}"><span class="dk-n">${d.name}</span><span class="dk-pr">${pr}</span></div>`;
+      });
       dh+='</div>';
       col.innerHTML+=`<div class="pnl">${dh}</div>`;
 
       // Desertlar
-      let sh='<div class="ph"><h2>Desertlar</h2></div><div class="pi">';
+      let sh='<div class="ph"><h2>Desertlar</h2></div>';
       sh+=renderSweets(MENU.shirinliklar.items);
-      sh+='</div>';
       col.innerHTML+=`<div class="pnl">${sh}</div>`;
     } else {
       byCols[c].forEach(sec=>{
@@ -448,6 +488,7 @@ const MENU = {
 
     grid.appendChild(col);
   }
+
 })();
 </script>
 
