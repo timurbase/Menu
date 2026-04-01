@@ -1,0 +1,19 @@
+🎨 Asosiy ranglar (Primary palette)
+To‘q jigarrang (wood tone) – #6B4F3A
+→ devor va umumiy stilga mos
+Yorqin oltin (neon rangga yaqin) – #FFC857
+→ yozuvlar, logotip, aksent uchun
+Qora (deep black) – #1C1C1C
+→ fon uchun juda mos
+🎨 Qo‘shimcha ranglar (Secondary)
+Och bej / krem – #F5E6D3
+→ menyu foni yoki matn kontrasti uchun
+Kulrang (modern vibe) – #8A8A8A
+→ ikkilamchi matnlar
+Yorqin oq (soft white) – #FFFFFF
+→ asosiy yozuvlar uchun
+✨ Accent ranglar (ozroq ishlatiladi)
+Issiq sariq (light neon) – #FFD166
+→ highlight / price uchun
+To‘q yashil (premium vibe) – #2F5D50
+→ agar biroz kontrast qo‘shmoqchi bo‘lsangiz

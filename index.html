@@ -1,0 +1,390 @@
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Menu</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=Nunito:wght@600;700;800;900&display=swap" rel="stylesheet">
+    <style>
+        *{margin:0;padding:0;box-sizing:border-box}
+        :root{
+            --bg1:#FFF8EE;--bg2:#FFF3E0;--bg3:#FFFDF8;
+            --red:#D4422A;--red2:#B8301C;--gold:#E8A317;
+            --dark:#2C1810;--cream:#FFF5E6;
+            --green:#3A7D44;--lgold:#F5C846;
+            --text:#3B2312;--text2:#6B4C30;--text3:#9A7B5A;
+        }
+        html,body{width:100%;height:100%;overflow:hidden}
+        body{font-family:'Nunito',sans-serif;color:var(--text);background:var(--bg1)}
+
+        .tv{
+            width:100vw;height:100vh;position:relative;overflow:hidden;
+            display:grid;grid-template-rows:auto auto 1fr;
+            gap:.5vh;padding:.7vh 1vw .5vh;
+            background:linear-gradient(135deg,var(--bg1) 0%,var(--bg2) 50%,var(--bg3) 100%);
+        }
+
+        /* ═══ DECO ═══ */
+        .deco{position:absolute;inset:0;pointer-events:none;z-index:0}
+        .deco div{position:absolute;border-radius:50%;opacity:.07}
+        .dc1{width:30vw;height:30vw;top:-12vw;right:-5vw;background:var(--red)}
+        .dc2{width:25vw;height:25vw;bottom:-10vw;left:-5vw;background:var(--gold)}
+        .dc3{width:15vw;height:15vw;top:40%;left:-3vw;background:var(--green)}
+        .deco svg{position:absolute;opacity:.05}
+        .df1{width:11vh;top:3%;right:1%;fill:var(--red);transform:rotate(15deg)}
+        .df2{width:9vh;bottom:4%;left:1%;fill:var(--green);transform:rotate(-20deg)}
+        .df3{width:10vh;top:50%;right:.5%;fill:var(--red);transform:rotate(-10deg)}
+        .df4{width:8vh;top:4%;left:1%;fill:var(--green);transform:rotate(-12deg)}
+
+        /* ═══ HEADER ═══ */
+        .hdr{text-align:center;position:relative;z-index:2;padding:.2vh 0}
+        .hdr h1{
+            font-family:'Playfair Display',serif;
+            font-size:4.5vh;font-weight:900;color:var(--dark);
+            letter-spacing:1vw;text-transform:uppercase;
+        }
+        .hdr-sub{font-size:1.2vh;color:var(--text3);letter-spacing:.4vw;text-transform:uppercase;font-weight:700}
+        .hdr-line{height:2px;margin-top:.2vh;background:linear-gradient(90deg,transparent 10%,var(--red) 35%,var(--gold) 50%,var(--red) 65%,transparent 90%)}
+
+        /* ═══ KOMBO HERO ═══ */
+        .hero{position:relative;z-index:1;display:grid;grid-template-columns:1fr 1fr;gap:.8vw}
+        .combo{
+            display:flex;align-items:center;gap:.8vw;
+            background:linear-gradient(135deg,rgba(212,66,42,.08),rgba(245,200,70,.1),rgba(255,255,255,.6));
+            backdrop-filter:blur(12px);
+            border:2px solid rgba(212,66,42,.2);
+            border-radius:1.2vh;padding:.8vh .7vw;
+            position:relative;overflow:hidden;
+            box-shadow:0 4px 20px rgba(0,0,0,.06);
+        }
+        .combo::before{
+            content:'';position:absolute;top:0;left:0;right:0;height:50%;
+            background:linear-gradient(180deg,rgba(255,255,255,.4),transparent);
+            pointer-events:none;border-radius:1.2vh 1.2vh 0 0;
+        }
+        .combo-tag{
+            position:absolute;top:.5vh;right:.5vw;
+            font-size:1.2vh;font-weight:900;letter-spacing:.12vw;
+            color:#fff;background:var(--red);
+            padding:.2vh .5vw;border-radius:.35vh;
+            box-shadow:0 2px 8px rgba(212,66,42,.3);
+        }
+        .combo img{
+            width:11vh;height:11vh;border-radius:1vh;
+            object-fit:cover;flex-shrink:0;
+            border:2px solid rgba(255,255,255,.6);
+            box-shadow:0 4px 16px rgba(0,0,0,.12);
+        }
+        .cc{flex:1}
+        .cc-n{font-family:'Playfair Display',serif;font-size:2.8vh;font-weight:900;color:var(--dark);line-height:1.1;margin-bottom:.2vh}
+        .cc-p{font-family:'Playfair Display',serif;font-size:3.5vh;font-weight:900;color:var(--red);line-height:1;margin-bottom:.15vh}
+        .cc-p small{font-family:'Nunito',sans-serif;font-size:1.3vh;color:var(--text3);font-weight:700;margin-left:.2vw}
+        .cc-d{font-size:1.5vh;color:var(--text2);font-weight:700;line-height:1.3}
+        .cc-d b{color:var(--dark);font-weight:900}
+        .cc-plus{color:var(--red);font-weight:900;margin:0 .12vw}
+
+        /* ═══ MAIN — 3 COLUMNS ═══ */
+        .grid{
+            position:relative;z-index:1;
+            display:grid;grid-template-columns:1fr 1fr 1fr;
+            gap:.7vw;min-height:0;overflow:hidden;
+        }
+        .col{display:flex;flex-direction:column;gap:.4vh;overflow:hidden}
+
+        /* ═══ PANEL ═══ */
+        .pnl{
+            display:flex;flex-direction:column;
+            background:rgba(255,255,255,.45);
+            backdrop-filter:blur(10px);
+            border:1px solid rgba(255,255,255,.7);
+            border-radius:.8vh;padding:.4vh .4vw;
+            box-shadow:0 2px 12px rgba(0,0,0,.04);
+        }
+
+        /* brush header */
+        .ph{
+            display:flex;align-items:center;
+            margin-bottom:.35vh;position:relative;
+            padding:.25vh .4vw;
+        }
+        .ph::before{
+            content:'';position:absolute;inset:0;
+            background:var(--red);border-radius:.4vh;
+            transform:skewX(-2deg);opacity:.9;
+        }
+        .ph h2{
+            position:relative;z-index:1;
+            font-family:'Playfair Display',serif;
+            font-size:2.2vh;font-weight:900;color:#fff;
+            text-transform:uppercase;letter-spacing:.1vw;
+            text-shadow:0 1px 3px rgba(0,0,0,.15);
+        }
+
+        .pi{display:flex;flex-direction:column;gap:.35vh}
+
+        /* ═══ FOOD ITEM ═══ */
+        .fi{
+            display:flex;gap:.4vw;align-items:center;
+            background:rgba(255,255,255,.5);
+            border:1px solid rgba(255,255,255,.8);
+            border-radius:.5vh;padding:.35vh .3vw;
+            backdrop-filter:blur(6px);
+            box-shadow:0 1px 6px rgba(0,0,0,.03);
+        }
+        .fi img{
+            width:6vh;height:6vh;border-radius:.4vh;
+            object-fit:cover;flex-shrink:0;
+            border:1px solid rgba(0,0,0,.06);
+            box-shadow:0 2px 8px rgba(0,0,0,.08);
+        }
+        .fi-b{flex:1;min-width:0}
+        .fi-r{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:.15vh}
+        .fi-n{font-size:2.4vh;font-weight:900;color:var(--dark);line-height:1.15}
+        .fi-p{
+            font-family:'Playfair Display',serif;
+            font-size:2.7vh;font-weight:900;color:var(--red);
+            white-space:nowrap;flex-shrink:0;
+        }
+
+        /* ═══ VARIANTS ═══ */
+        .vr{display:flex;flex-wrap:wrap;gap:.15vh .12vw}
+        .vt{
+            display:inline-flex;align-items:center;gap:.1vw;
+            background:rgba(232,163,23,.08);
+            border:1px solid rgba(232,163,23,.15);
+            border-radius:.25vh;padding:.08vh .22vw;
+        }
+        .vn{font-size:1.5vh;color:var(--text2);font-weight:700}
+        .vp{font-size:1.6vh;color:var(--red2);font-weight:900}
+
+        /* ═══ DRINKS ═══ */
+        .dk{
+            display:flex;align-items:center;gap:.3vw;
+            padding:.3vh .25vw;
+            background:rgba(255,255,255,.5);
+            border:1px solid rgba(255,255,255,.8);
+            border-radius:.4vh;backdrop-filter:blur(6px);
+            box-shadow:0 1px 4px rgba(0,0,0,.03);
+        }
+        .dk img{width:4vh;height:4vh;border-radius:.3vh;object-fit:cover;flex-shrink:0;border:1px solid rgba(0,0,0,.05);box-shadow:0 1px 4px rgba(0,0,0,.06)}
+        .dk-i{flex:1;display:flex;justify-content:space-between;align-items:center}
+        .dk-n{font-size:1.8vh;font-weight:800;color:var(--dark)}
+        .dk-s{display:flex;gap:.1vw}
+        .dk-s .vt{border:none;background:rgba(232,163,23,.1)}
+        .dk-pr{font-size:1.8vh;font-weight:900;color:var(--red)}
+
+        .b3{display:flex;gap:.15vw}
+        .b3 .dk{flex:1;padding:.25vh .15vw}
+        .b3 .dk-n{font-size:1.4vh}
+        .b3 .dk-pr{font-size:1.5vh}
+        .b3 img{width:3vh;height:3vh}
+
+        /* ═══ SWEETS 5x2 grid ═══ */
+        .sw-grid{display:grid;grid-template-columns:1fr 1fr 1fr 1fr 1fr 1fr;gap:.25vh .12vw}
+        .sw{
+            display:flex;flex-direction:column;align-items:center;
+            padding:.3vh .1vw;text-align:center;
+            background:rgba(255,255,255,.5);
+            border:1px solid rgba(255,255,255,.8);
+            border-radius:.4vh;backdrop-filter:blur(6px);
+        }
+        .sw img{width:4.5vh;height:4.5vh;border-radius:.3vh;object-fit:cover;border:1px solid rgba(0,0,0,.05);margin-bottom:.15vh}
+        .sw-n{font-size:1.4vh;font-weight:800;color:var(--dark);line-height:1.1}
+        .sw-p{font-size:1.5vh;font-weight:900;color:var(--red)}
+    </style>
+</head>
+<body>
+
+<div class="tv">
+    <div class="deco">
+        <div class="dc1"></div><div class="dc2"></div><div class="dc3"></div>
+        <svg class="df1" viewBox="0 0 100 100"><path d="M50 5c-5 0-10 8-10 20 0 20 5 55 10 70 5-15 10-50 10-70C60 13 55 5 50 5z"/><path d="M45 5c-3-4-8-5-10-2s0 7 3 9c2 1 5 0 7-2z"/></svg>
+        <svg class="df2" viewBox="0 0 100 100"><path d="M10 90C10 90 15 20 80 10c0 0-10 30-25 45S10 90 10 90z"/></svg>
+        <svg class="df3" viewBox="0 0 100 100"><circle cx="50" cy="55" r="35"/><path d="M35 25c5-8 15-12 15-12s10 4 15 12c-5-2-10-3-15-3s-10 1-15 3z" fill="currentColor" opacity=".6"/></svg>
+        <svg class="df4" viewBox="0 0 100 100"><path d="M10 90C10 90 15 20 80 10c0 0-10 30-25 45S10 90 10 90z"/></svg>
+    </div>
+
+    <div class="hdr">
+        <h1>Menu</h1>
+        <div class="hdr-sub">Mazali taomlar & ichimliklar</div>
+        <div class="hdr-line"></div>
+    </div>
+
+    <div class="hero" id="heroRow"></div>
+    <div class="grid" id="foodGrid"></div>
+</div>
+
+<script>
+// ╔══════════════════════════════════════════════════════════════════╗
+// ║  MENYU MA'LUMOTLARI — NARXLARNI SHU YERDAN O'ZGARTIRING!       ║
+// ╚══════════════════════════════════════════════════════════════════╝
+
+const MENU = {
+
+  // ─── 1-USTUN: BURGERLAR + HOT-DOGLAR ───
+  burgerlar: {
+    col:1, cat:"Burgerlar", items:[
+      { name:"Non Burger", price:"38,000", img:"images/non-burger.jpg",
+        vars:[["Kotta","38,000"],["Kichik","33,000"]] },
+      { name:"Tovuq Burger", price:"33,000", img:"images/tovuq-burger.jpg",
+        vars:[["Kotta","33,000"],["Kichik","28,000"]] },
+      { name:"Burger", price:"33,000", img:"images/burger.jpg",
+        vars:[["Oddiy","33,000"],["Chizburger","36,000"],["Bigburger","40,000"],["ChikenBurger","30,000"],["MiksBurger","40,000"]] },
+    ]
+  },
+  hotdoglar: {
+    col:1, cat:"Hot-Doglar", items:[
+      { name:"Hotdog", price:"13,000", img:"images/hotdog.jpg",
+        vars:[["Oddiy","13,000"],["Kanada","16,000"]] },
+      { name:"Dvaynoy Hotdog", price:"16,000", img:"images/dvaynoy-hotdog.jpg",
+        vars:[["Oddiy","16,000"],["Kanada","20,000"]] },
+      { name:"BBQ Hotdog", price:"28,000", img:"images/bbq-hotdog.jpg",
+        vars:[["Oddiy","28,000"],["Dvaynoy BBQ","38,000"]] },
+      { name:"Haggi", price:"33,000", img:"images/haggi.jpg",
+        vars:[["Kichik","33,000"],["Kotta","40,000"]] },
+    ]
+  },
+
+  // ─── 2-USTUN: LAVASH + PITSA + GARNIRLAR ───
+  lavash: {
+    col:2, cat:"Lavash", items:[
+      { name:"Lavash mol go'shti", price:"38,000", img:"images/lavash-goshti.jpg",
+        vars:[["Oddiy","38,000"],["Sirli","41,000"],["Sirli tandir","45,000"]] },
+      { name:"Lavash tovuqli", price:"33,000", img:"images/lavash-tovuq.jpg",
+        vars:[["Oddiy","33,000"],["Tandir","35,000"],["Sirli tovuq","37,000"],["Sirli tandir","40,000"]] },
+    ]
+  },
+  pitsa: {
+    col:2, cat:"Pitsa", items:[
+      { name:"Peperoni", price:"60,000", img:"images/peperoni.jpg",
+        vars:[["25 sm","60,000"],["35 sm","92,000"]] },
+      { name:"Pizza Donar", price:"72,000", img:"images/pizza-donar.jpg",
+        vars:[["25 sm","72,000"],["35 sm","110,000"]] },
+      { name:"Pizza Assorti", price:"66,000", img:"images/pizza-assorti.jpg",
+        vars:[["25 sm","66,000"],["35 sm","100,000"]] },
+      { name:"Pizza Qazili", price:"90,000", img:"images/pizza-qazili.jpg",
+        vars:[["25 sm","90,000"],["35 sm","120,000"]] },
+    ]
+  },
+  garnirlar: {
+    col:2, cat:"Garnirlar", items:[
+      { name:"Fri", price:"15,000", img:"images/fri.jpg",
+        vars:[["Oddiy","15,000"],["Po derevenski","20,000"]] },
+    ]
+  },
+
+  // ─── 3-USTUN: ICHIMLIKLAR + SHIRINLIKLAR ───
+  ichimliklar: {
+    col:3, cat:"Ichimliklar", type:"drinks", items:[
+      { name:"Fanta", img:"images/fanta.jpg",
+        vars:[["0.5L","7,000"],["1L","12,000"],["1.5L","15,000"]] },
+      { name:"Cola", img:"images/cola.jpg",
+        vars:[["0.5L","7,000"],["1L","12,000"],["1.5L","15,000"]] },
+      { name:"FuseTea Ko'k", img:"images/fusetea-kok.jpg",
+        vars:[["0.5L","8,000"],["1L","13,000"]] },
+      { name:"FuseTea Qora", img:"images/fusetea-qora.jpg",
+        vars:[["0.5L","8,000"],["1L","13,000"]] },
+      { name:"Bonaqua Gazli", img:"images/bonaqua.jpg",
+        vars:[["0.5L","4,000"],["1L","6,000"],["1.5L","8,000"]] },
+      { name:"Bonaqua Gazsiz", img:"images/bonaqua.jpg",
+        vars:[["0.5L","4,000"],["1L","6,000"],["1.5L","8,000"]] },
+    ]
+  },
+  balnishniy: {
+    col:3, type:"baln", items:[
+      { name:"Cola baln.", price:"10,000", img:"images/cola-baln.jpg" },
+      { name:"Fanta baln.", price:"10,000", img:"images/fanta-baln.jpg" },
+      { name:"Sprite baln.", price:"10,000", img:"images/sprite-baln.jpg" },
+    ]
+  },
+  shirinliklar: {
+    col:3, cat:"Desertlar", type:"sweets", items:[
+      { name:"Chizkeyk Iriska", price:"32,000", img:"images/chizkeyk-iriska.jpg" },
+      { name:"Chizkeyk Fistikli", price:"32,000", img:"images/chizkeyk-fistikli.jpg" },
+      { name:"Chizkeyk New York", price:"32,000", img:"images/chizkeyk-newyork.jpg" },
+      { name:"Chizkeyk Malinali", price:"32,000", img:"images/chizkeyk-malinali.jpg" },
+      { name:"Maxroviy tort", price:"20,000", img:"images/maxroviy-tort.jpg" },
+      { name:"Medovik", price:"20,000", img:"images/medovik.jpg" },
+      { name:"Fistashkali lenta", price:"42,000", img:"images/fistashkali-lenta.jpg" },
+      { name:"Rulet Snickers", price:"32,000", img:"images/rulet-snickers.jpg" },
+      { name:"Pirojniy Malinali", price:"20,000", img:"images/pirojniy-malinali.jpg" },
+      { name:"Spartak", price:"20,000", img:"images/spartak.jpg" },
+      { name:"Trayfl", price:"25,000", img:"images/trayfl.jpg" },
+      { name:"Trayfl Snickers", price:"50,000", img:"images/trayfl-snickers.jpg" },
+    ]
+  },
+
+  // ═══ KOMBO ═══
+  kombo: [
+    { name:"Student Kombo", price:"33,000", img:"images/kombo1.jpg",
+      items:["Hotdog","Fri","Cola balnishniy"] },
+    { name:"Student Kombo 2", price:"50,000", img:"images/kombo2.jpg",
+      items:["Lavash tovuqli","Fri","Fanta balnishniy","Sous ketchup"] },
+  ]
+};
+
+// ═══ RENDER ═══
+(function(){
+  // COMBO
+  document.getElementById('heroRow').innerHTML = MENU.kombo.map(k=>{
+    const d = k.items.map(i=>`<b>${i}</b>`).join('<span class="cc-plus">+</span>');
+    return `<div class="combo">
+      <span class="combo-tag">KOMBO SET</span>
+      <img src="${k.img}">
+      <div class="cc">
+        <div class="cc-n">${k.name}</div>
+        <div class="cc-p">${k.price}<small>so'm</small></div>
+        <div class="cc-d">${d}</div>
+      </div>
+    </div>`;
+  }).join('');
+
+  // GRID
+  const grid = document.getElementById('foodGrid');
+  const byCols = {1:[],2:[],3:[]};
+  Object.entries(MENU).forEach(([k,s])=>{ if(k!=='kombo') byCols[s.col].push(s); });
+
+  grid.innerHTML = '';
+  for(let c=1;c<=3;c++){
+    const col = document.createElement('div');
+    col.className='col';
+
+    byCols[c].forEach(sec=>{
+      let h='';
+      if(sec.cat) h+=`<div class="ph"><h2>${sec.cat}</h2></div>`;
+      h+='<div class="pi">';
+
+      if(sec.type==='sweets'){
+        h+='<div class="sw-grid">';
+        sec.items.forEach(it=>{
+          h+=`<div class="sw"><img src="${it.img}"><span class="sw-n">${it.name}</span><span class="sw-p">${it.price}</span></div>`;
+        });
+        h+='</div>';
+      } else if(sec.type==='drinks'){
+        sec.items.forEach(d=>{
+          const sv=(d.vars||[]).map(v=>`<div class="vt"><span class="vn">${v[0]}</span><span class="vp">${v[1]}</span></div>`).join('');
+          h+=`<div class="dk"><img src="${d.img}"><div class="dk-i"><span class="dk-n">${d.name}</span><div class="dk-s">${sv}</div></div></div>`;
+        });
+      } else if(sec.type==='baln'){
+        h+='<div class="b3">'+sec.items.map(d=>
+          `<div class="dk"><img src="${d.img}"><div class="dk-i"><span class="dk-n">${d.name}</span><span class="dk-pr">${d.price}</span></div></div>`
+        ).join('')+'</div>';
+      } else {
+        sec.items.forEach(it=>{
+          const vs=(it.vars||[]).map(v=>`<div class="vt"><span class="vn">${v[0]}</span><span class="vp">${v[1]}</span></div>`).join('');
+          h+=`<div class="fi"><img src="${it.img}"><div class="fi-b"><div class="fi-r"><span class="fi-n">${it.name}</span><span class="fi-p">${it.price}</span></div><div class="vr">${vs}</div></div></div>`;
+        });
+      }
+
+      h+='</div>';
+      col.innerHTML+=`<div class="pnl">${h}</div>`;
+    });
+
+    grid.appendChild(col);
+  }
+})();
+</script>
+
+</body>
+</html>

@@ -1,0 +1,20 @@
+  ▎ MENU DATA:
+  ▎ BURGERLAR: Non Burger 🐄 38,000 (Kotta: 38,000 / Kichik: 33,000) | Tovuq Burger 🐔 33,000 (Kotta: 33,000 / Kichik:
+  28,000) | Burger 🐄🐔 33,000 (Oddiy: 33,000 / Chizburger: 36,000 / Bigburger: 40,000 / ChikenBurger: 30,000 /
+  MiksBurger: 40,000)
+  ▎ HOT-DOGLAR: Hotdog 🐄 13,000 (Oddiy: 13,000 / Kanada: 16,000) | Dvaynoy Hotdog 🐄 16,000 (Oddiy: 16,000 / Kanada:
+  20,000) | BBQ Hotdog 🐄 28,000 (Oddiy: 28,000 / Dvaynoy BBQ: 38,000) | Haggi 🐄 33,000 (Kichik: 33,000 / Kotta:
+  40,000)
+  ▎ PITSA: Peperoni 60,000 (25sm: 60,000 / 35sm: 92,000) | Pizza Donar 72,000 (25sm: 72,000 / 35sm: 110,000) | Pizza
+  Assorti 66,000 (25sm: 66,000 / 35sm: 100,000) | Pizza Qazili 90,000 (25sm: 90,000 / 35sm: 120,000)
+  ▎ LAVASH: Lavash mol go'shti 🐄 38,000 (Oddiy: 38,000 / Sirli: 41,000 / Sirli tandir: 45,000) | Lavash tovuqli 🐔
+  33,000 (Oddiy: 33,000 / Tandir: 35,000 / Sirli tovuq: 37,000 / Sirli tandir: 40,000)
+  ▎ GARNIRLAR: Fri 🍟 15,000 (Oddiy: 15,000 / Po derevenski: 20,000)
+  ▎ ICHIMLIKLAR: Fanta 12,000 (0.5L: 7,000 / 1L: 12,000 / 1.5L: 15,000) | Cola 12,000 (0.5L: 7,000 / 1L: 12,000 / 1.5L:
+  15,000) | FuseTea Ko'k 13,000 (0.5L: 8,000 / 1L: 13,000) | FuseTea Qora 13,000 (0.5L: 8,000 / 1L: 13,000) | Bonaqua
+  Gazli 8,000 (0.5L: 4,000 / 1L: 6,000 / 1.5L: 8,000) | Bonaqua Gazsiz 8,000 (0.5L: 4,000 / 1L: 6,000 / 1.5L: 8,000) |
+  Cola balnishniy 10,000 | Fanta balnishniy 10,000 | Sprite balnishniy 10,000
+  ▎ KOMBO SETLAR: Student Kombo ⭐ 33,000 (Hotdog + Fri + Cola balnishniy) | Student Kombo 2 ⭐ 50,000 (Lavash tovuqli +
+   Fri + Fanta balnishniy + Sous ketchup)
+
+   
