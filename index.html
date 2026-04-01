@@ -20,7 +20,7 @@
 
         .tv{
             width:100vw;height:100vh;position:relative;overflow:hidden;
-            display:grid;grid-template-rows:auto auto 1fr;
+            display:grid;grid-template-rows:auto auto 1fr auto;
             gap:.35vh;padding:.5vh 1vw .4vh;
             background:linear-gradient(135deg,var(--bg1) 0%,var(--bg2) 50%,var(--bg3) 100%);
         }
@@ -117,7 +117,7 @@
         .ph h2{
             position:relative;z-index:1;
             font-family:'Playfair Display',serif;
-            font-size:2.2vh;font-weight:900;color:#fff;
+            font-size:2.6vh;font-weight:900;color:#fff;
             text-transform:uppercase;letter-spacing:.1vw;
             text-shadow:0 1px 3px rgba(0,0,0,.15);
         }
@@ -141,10 +141,10 @@
         }
         .fi-b{flex:1;min-width:0}
         .fi-r{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:.15vh}
-        .fi-n{font-size:2.4vh;font-weight:900;color:var(--dark);line-height:1.15}
+        .fi-n{font-size:2.8vh;font-weight:900;color:var(--dark);line-height:1.15}
         .fi-p{
             font-family:'Playfair Display',serif;
-            font-size:2.7vh;font-weight:900;color:var(--red);
+            font-size:3.2vh;font-weight:900;color:var(--red);
             white-space:nowrap;flex-shrink:0;
         }
 
@@ -156,8 +156,8 @@
             border:1px solid rgba(232,163,23,.15);
             border-radius:.25vh;padding:.08vh .22vw;
         }
-        .vn{font-size:1.5vh;color:var(--text2);font-weight:700}
-        .vp{font-size:1.6vh;color:var(--red2);font-weight:900}
+        .vn{font-size:1.8vh;color:var(--text2);font-weight:700}
+        .vp{font-size:1.9vh;color:var(--red2);font-weight:900}
 
         /* ═══ DRINKS SECTION ═══ */
         .dk-grid{display:grid;grid-template-columns:1fr 1fr;gap:.3vh .2vw}
@@ -171,10 +171,10 @@
             border-radius:.4vh;backdrop-filter:blur(6px);
             box-shadow:0 1px 4px rgba(0,0,0,.03);
         }
-        .dk-n{font-size:1.7vh;font-weight:800;color:var(--dark)}
+        .dk-n{font-size:2.1vh;font-weight:800;color:var(--dark)}
         .dk-p-wrap{display:flex;flex-wrap:wrap;gap:.08vw;justify-content:flex-end}
         .dk-p-wrap .vt{border:none;background:rgba(232,163,23,.12)}
-        .dk-pr{font-size:1.7vh;font-weight:900;color:var(--red)}
+        .dk-pr{font-size:2.1vh;font-weight:900;color:var(--red)}
 
         /* maxito — rasmli, premium */
         .dk-mox{
@@ -191,8 +191,8 @@
             border:1px solid rgba(58,125,68,.2);
             box-shadow:0 2px 6px rgba(0,0,0,.1);
         }
-        .dk-mox .dk-n{font-size:1.6vh}
-        .dk-mox .dk-pr{font-size:1.7vh}
+        .dk-mox .dk-n{font-size:2vh}
+        .dk-mox .dk-pr{font-size:2.1vh}
 
         /* sub-label */
         .dk-label{
@@ -222,8 +222,8 @@
             border-radius:.4vh;backdrop-filter:blur(6px);
         }
         .sw img{width:4.5vh;height:4.5vh;border-radius:.3vh;object-fit:cover;border:1px solid rgba(0,0,0,.05);margin-bottom:.15vh}
-        .sw-n{font-size:1.4vh;font-weight:800;color:var(--dark);line-height:1.1}
-        .sw-p{font-size:1.5vh;font-weight:900;color:var(--red)}
+        .sw-n{font-size:1.7vh;font-weight:800;color:var(--dark);line-height:1.1}
+        .sw-p{font-size:1.8vh;font-weight:900;color:var(--red)}
 
         /* ═══ BANNER ═══ */
         .banner{
@@ -253,6 +253,24 @@
         .banner-sub{
             font-size:1.4vh;font-weight:700;color:rgba(255,255,255,.85);
         }
+        /* ═══ THANKS ═══ */
+        .thanks{
+            position:relative;z-index:2;
+            text-align:center;
+            font-family:'Playfair Display',serif;
+            font-size:2vh;font-weight:900;font-style:italic;
+            color:var(--red);
+            letter-spacing:.1vw;
+            padding:.2vh 0;
+        }
+        .delivery{
+            font-family:'Nunito',sans-serif;
+            font-size:1.5vh;font-weight:800;font-style:normal;
+            color:var(--dark);
+            letter-spacing:.05vw;
+            margin-top:.1vh;
+        }
+
         /* ═══ PRINT / SCREENSHOT BUTTON ═══ */
         .save-btn{
             position:fixed;top:1vh;right:1vw;z-index:999;
@@ -284,6 +302,7 @@
 
     <div class="hero" id="heroRow"></div>
     <div class="grid" id="foodGrid"></div>
+    <div class="thanks">Tanlovingiz uchun rahmat!<div class="delivery">Yetkazib berish xizmati mavjud: @n1bito_bot</div></div>
 </div>
 
 <script>
