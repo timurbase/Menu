@@ -20,7 +20,7 @@
 
         .tv{
             width:100vw;height:100vh;position:relative;overflow:hidden;
-            display:grid;grid-template-rows:auto auto 1fr auto;
+            display:grid;grid-template-rows:auto auto 1fr;
             gap:.35vh;padding:.5vh 1vw .4vh;
             background:linear-gradient(135deg,var(--bg1) 0%,var(--bg2) 50%,var(--bg3) 100%);
         }
@@ -253,11 +253,22 @@
         .banner-sub{
             font-size:1.4vh;font-weight:700;color:rgba(255,255,255,.85);
         }
+        /* ═══ PRINT / SCREENSHOT BUTTON ═══ */
+        .save-btn{
+            position:fixed;top:1vh;right:1vw;z-index:999;
+            background:var(--red);color:#fff;border:none;
+            padding:.6vh 1vw;border-radius:.5vh;cursor:pointer;
+            font-family:'Nunito',sans-serif;font-size:1.5vh;font-weight:800;
+            box-shadow:0 2px 10px rgba(0,0,0,.2);
+        }
+        .save-btn:hover{background:var(--red2)}
+        @media print{.save-btn{display:none}}
     </style>
 </head>
 <body>
 
-<div class="tv">
+<button class="save-btn" onclick="saveAsImage()">Rasm saqlash</button>
+<div class="tv" id="tvScreen">
     <div class="deco">
         <div class="dc1"></div><div class="dc2"></div><div class="dc3"></div>
         <svg class="df1" viewBox="0 0 100 100"><path d="M50 5c-5 0-10 8-10 20 0 20 5 55 10 70 5-15 10-50 10-70C60 13 55 5 50 5z"/><path d="M45 5c-3-4-8-5-10-2s0 7 3 9c2 1 5 0 7-2z"/></svg>
@@ -267,21 +278,12 @@
     </div>
 
     <div class="hdr">
-        <h1>Menu</h1>
-        <div class="hdr-sub">Mazali taomlar & ichimliklar</div>
+        <div class="hdr-sub">Burgerlar, Hot-doglar, Lavash, Pitsa va Boshqalar</div>
         <div class="hdr-line"></div>
     </div>
 
     <div class="hero" id="heroRow"></div>
     <div class="grid" id="foodGrid"></div>
-    <div class="banner">
-        <span class="banner-pct">50%</span>
-        <div>
-            <div class="banner-txt">Barcha fastfood mahsulotlariga chegirma!</div>
-            <div class="banner-sub">Burgerlar, Hot-doglar, Lavash, Pitsa va Kombolar</div>
-        </div>
-        <span class="banner-pct">50%</span>
-    </div>
 </div>
 
 <script>
@@ -319,7 +321,7 @@ const MENU = {
   lavash: {
     col:2, cat:"Lavash", items:[
       { name:"Lavash mol go'shti", price:"37,000", img:"images/lavash-goshti.jpg",
-        vars:[["Oddiy","37,000"],["Oddiy tandir","39,000"],["Sirli","40,000"],["Sirli tandir","45,000"]] },
+        vars:[["Oddiy","37,000"],["Oddiy tandir","39,000"],["Sirli","40,000"],["Sirli tandir","42,000"]] },
       { name:"Lavash tovuqli", price:"33,000", img:"images/lavash-tovuq.jpg",
         vars:[["Oddiy","33,000"],["Tandir","35,000"],["Sirli tovuq","37,000"],["Sirli tandir","40,000"]] },
     ]
@@ -490,7 +492,32 @@ const MENU = {
   }
 
 })();
+
+// ═══ RASM SAQLASH ═══
+function saveAsImage(){
+  const btn = document.querySelector('.save-btn');
+  btn.style.display='none';
+  const el = document.getElementById('tvScreen');
+  const s = window.devicePixelRatio || 2;
+  html2canvas(el,{
+    scale: s,
+    useCORS: true,
+    backgroundColor: null,
+    width: el.offsetWidth,
+    height: el.offsetHeight
+  }).then(canvas=>{
+    btn.style.display='';
+    const link = document.createElement('a');
+    link.download = 'menu.png';
+    link.href = canvas.toDataURL('image/png');
+    link.click();
+  }).catch(err=>{
+    btn.style.display='';
+    alert('Xatolik: '+err.message);
+  });
+}
 </script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
 
 </body>
 </html>
